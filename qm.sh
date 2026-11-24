@@ -76,9 +76,9 @@ while true; do
 			;;
 		"backup")
 			date=$(date +"%m-%d-%Y")
-			git add .
+			git add . > /dev/null 2>&1
 			git commit -m "$date" > /dev/null 2>&1
-			git push
+			git push > /dev/null 2>&1
 			echo "Files backed up"
 			;;
 		"mkclass")
