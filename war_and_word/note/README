@@ -1,0 +1,1 @@
+pandoc nov12.txt -f markdown+hard_line_breaks --preserve-tabs -o output.docx
