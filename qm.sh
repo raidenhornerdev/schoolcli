@@ -118,9 +118,9 @@ while true; do
 				passthrough="${passthrough/misc /}"
 				echo "$passthrough"
 			elif [[ "${user_input[1]}" == "home" ]]; then
-				cd ~${workingdirectory}
+				cd ~"${workingdirectory}"
                 	else
-                        	cd ~${workingdirectory}/${user_input[1]}
+                        	cd ~"${workingdirectory}"/${user_input[1]}
                 	fi
 			;;
 		"edit")           
