@@ -20,9 +20,29 @@ School File Program v1
 Based on Quickmacro Program v1
 by: Raiden Horner "
 
+
+
+
+
+
 if $setup; then
 	echo "please run command 'setup'\n"
 fi
+
+
+
+if ! git ls-remote --exit-code origin > /dev/null 2>&1; then
+	echo "\nNo Internet\n"
+else 
+	git pull > /dev/null 2>&1
+fi 
+
+
+
+
+
+
+
 
 history=("0", "0", "0", "0", "0", "0", "0", "0", "0", "0")
 
@@ -42,6 +62,12 @@ while true; do
 
 	case "${user_input[0]}" in 
         	"exit")
+
+			date=$(date +"%m-%d-%Y")
+                        git add . > /dev/null 2>&1
+                        git commit -m "$date" > /dev/null 2>&1
+                        git push > /dev/null 2>&1
+                        echo "Files backed up"
                 	break
 			;;
 
