@@ -5,12 +5,16 @@ command_not_found_handle() {
         return 0
         }
 
-
-setup=true
 source misc/setting/config.env
 
 
 
+#TO DO
+#finish schedule thing
+#update helpstring
+#Actually put in my schedule
+#add disallow list that checks if the input is in the disallow then if it is then skip the loop
+#add system for class that organizes it better
 
 
 
@@ -19,15 +23,6 @@ echo "
 School File Program v1
 Based on Quickmacro Program v1
 by: Raiden Horner "
-
-
-
-
-
-
-if $setup; then
-	echo "please run command 'setup'\n"
-fi
 
 
 
@@ -72,7 +67,7 @@ while true; do
 			;;
 
 		"update")
-			sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y < /dev/null
+			sudo apt update -y ; sudo apt upgrade -y ; sudo apt autoremove -y
 			;;
 
 		"list")	
@@ -108,14 +103,10 @@ while true; do
 			echo "Files backed up"
 			;;
 		"mkclass")
-			mkdir ~/Desktop/school/${user_input[1]}
-			mkdir ~/Desktop/school/${user_input[1]}/note
-			mkdir ~/Desktop/school/${user_input[1]}/submit
-			mkdir ~/Desktop/school/${user_input[1]}/material
-			mkdir /media/$user/$storage/school/${user_input[1]} 
-			mkdir /media/$user/$storag/school/${user_input[1]}/note 
-               		mkdir /media/$user/$storag/school/${user_input[1]}/submit
-                	mkdir /media/$user/$storag/school/${user_input[1]}/material
+			mkdir ${workingdirectory}/${user_input[1]}
+			mkdir ${workingdirectory}/${user_input[1]}/note
+			mkdir ${workingdirectory}/${user_input[1]}/submit
+			mkdir ${workingdirectory}/${user_input[1]}/material
 			;;
 		"class")
 			passthrough="${rawinput/class /}"
@@ -127,9 +118,9 @@ while true; do
 				passthrough="${passthrough/misc /}"
 				echo "$passthrough"
 			elif [[ "${user_input[1]}" == "home" ]]; then
-				cd ~/Desktop/school
+				cd ${workingdirectory}
                 	else
-                        	cd ~/Desktop/school/${user_input[1]}
+                        	cd ${workingdirectory}/${user_input[1]}
                 	fi
 			;;
 		"edit")           
@@ -150,22 +141,22 @@ while true; do
                         if [[ -z "$passthrough" ]]; then
                                 echo "del: no argument given" 
 			elif [[ ${user_input[1]} == "trash" ]]; then
-				rm -r ~/Desktop/school/trash
-				mkdir ~/Desktop/school/trash
+				rm -r ${workingdirectory}/trash
+				mkdir ${workingdirectory}/trash
 				echo "trash emptied"
                         else
-				mv ${user_input[1]} ~/Desktop/school/trash
+				mv ${user_input[1]} ${workingdirectory}/trash
 			fi
 
 			;;
 		"trash")
 			
 			if [[ ${user_input[1]} == "empty" ]]; then
-                                rm -r ~/Desktop/school/trash
-                                mkdir ~/Desktop/school/trash
+                                rm -r ${workingdirectory}/trash
+                                mkdir ${workingdirectory}/trash
                                 echo "trash emptied"
 			else
-				ls ~/Desktop/school/trash
+				ls ${workingdirectory}/trash
 			fi
 			;;
 		"setup")
@@ -176,7 +167,6 @@ while true; do
 			mkdir misc
 			mkdir misc/setting
 			mkdir misc/setting/config.env
-			echo "setup=false" >> misc/setting/config.env
 			;;
 		
 		"back")
@@ -193,7 +183,7 @@ while true; do
 			
 			#scheduleformat time<time<class<room
 			
-			source ~Desktop/school/misc/setting/schedule.env
+			source ${workingdirectory}/misc/setting/schedule.env
 			weekday=$(date +"%A")
 			date=$(date +"%m-%d-%Y")
 			case "$weekday" in
