@@ -103,10 +103,10 @@ while true; do
 			echo "Files backed up"
 			;;
 		"mkclass")
-			mkdir ${workingdirectory}/${user_input[1]}
-			mkdir ${workingdirectory}/${user_input[1]}/note
-			mkdir ${workingdirectory}/${user_input[1]}/submit
-			mkdir ${workingdirectory}/${user_input[1]}/material
+			mkdir ~${workingdirectory}/${user_input[1]}
+			mkdir ~${workingdirectory}/${user_input[1]}/note
+			mkdir ~${workingdirectory}/${user_input[1]}/submit
+			mkdir ~${workingdirectory}/${user_input[1]}/material
 			;;
 		"class")
 			passthrough="${rawinput/class /}"
@@ -118,9 +118,9 @@ while true; do
 				passthrough="${passthrough/misc /}"
 				echo "$passthrough"
 			elif [[ "${user_input[1]}" == "home" ]]; then
-				cd ${workingdirectory}
+				cd ~${workingdirectory}
                 	else
-                        	cd ${workingdirectory}/${user_input[1]}
+                        	cd ~${workingdirectory}/${user_input[1]}
                 	fi
 			;;
 		"edit")           
@@ -141,22 +141,22 @@ while true; do
                         if [[ -z "$passthrough" ]]; then
                                 echo "del: no argument given" 
 			elif [[ ${user_input[1]} == "trash" ]]; then
-				rm -r ${workingdirectory}/trash
-				mkdir ${workingdirectory}/trash
+				rm -r ~${workingdirectory}/trash
+				mkdir ~${workingdirectory}/trash
 				echo "trash emptied"
                         else
-				mv ${user_input[1]} ${workingdirectory}/trash
+				mv ${user_input[1]} ~${workingdirectory}/trash
 			fi
 
 			;;
 		"trash")
 			
 			if [[ ${user_input[1]} == "empty" ]]; then
-                                rm -r ${workingdirectory}/trash
-                                mkdir ${workingdirectory}/trash
+                                rm -r ~${workingdirectory}/trash
+                                mkdir ~${workingdirectory}/trash
                                 echo "trash emptied"
 			else
-				ls ${workingdirectory}/trash
+				ls ~${workingdirectory}/trash
 			fi
 			;;
 		"setup")
@@ -183,7 +183,7 @@ while true; do
 			
 			#scheduleformat time<time<class<room
 			
-			source ${workingdirectory}/misc/setting/schedule.env
+			source ~/${workingdirectory}/misc/setting/schedule.env
 			weekday=$(date +"%A")
 			date=$(date +"%m-%d-%Y")
 			case "$weekday" in
