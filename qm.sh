@@ -75,24 +75,12 @@ while true; do
                 	mv ${user_input[1]} ${user_input[2]}
 			;;
 		"backup")
-			
-			if [[ "$dir" == "misc" ]]; then
-				rm -r /media/$user/$storage/school/misc
-				cp -r ~/Desktop/school/misc /media/raiden/CHROMEBOOK/school/misc
-				echo "misc backed up"
-			elif [[ "$dir" != "school" && "$dir" != "trash" ]]; then
-				rm -r /media/$user/$storage/school/$dir/note 
-        			rm -r /media/$user/$storage/school/$dir/submit
-        			rm -r /media/$user/$storage/school/$dir/material
-        			cp -r note /media/$user/$storage/school/$dir/note
-        			cp -r submit /media/$user/$storage/school/$dir/submit
-        			cp -r material /media/$user/$storage/school/$dir/material
-				echo "class $dir backed up"
-			else
-				echo "Cannot backup Directory"
-			fi
+			date=$(date +"%m-%d-%Y")
+			git add .
+			git commit -m "$date"
+			git push
+			echo "work backed up"
 			;;
-
 		"mkclass")
 			mkdir ~/Desktop/school/${user_input[1]}
 			mkdir ~/Desktop/school/${user_input[1]}/note
