@@ -77,7 +77,7 @@ while true; do
 		"backup")
 			date=$(date +"%m-%d-%Y")
 			git add .
-			git commit -m "$date" > /dev/null
+			git commit -m "$date" > /dev/null 2>&1
 			git push
 			echo "Files backed up"
 			;;
