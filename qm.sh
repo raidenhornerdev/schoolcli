@@ -113,8 +113,11 @@ while true; do
 		"mkclass")
 			mkdir ${HOME}${workingdirectory}/${user_input[1]}
 			mkdir ${HOME}${workingdirectory}/${user_input[1]}/note
+			touch ${HOME}${workingdirectory}/${user_input[1]}/note/.tmp
 			mkdir ${HOME}${workingdirectory}/${user_input[1]}/submit
+			touch ${HOME}${workingdirectory}/${user_input[1]}/submit/.tmp
 			mkdir ${HOME}${workingdirectory}/${user_input[1]}/material
+			touch ${HOME}${workingdirectory}/${user_input[1]}/material/.tmp
 			;;
 		"class")
 			passthrough="${rawinput/class /}"
@@ -151,6 +154,7 @@ while true; do
 			elif [[ ${user_input[1]} == "trash" ]]; then
 				rm -r ${HOME}${workingdirectory}/trash
 				mkdir ${HOME}${workingdirectory}/trash
+				touch ${HOME}${workingdirectory}/trash/.tmp
 				echo "trash emptied"
                         else
 				mv ${user_input[1]} ${HOME}${workingdirectory}/trash
@@ -162,6 +166,7 @@ while true; do
 			if [[ ${user_input[1]} == "empty" ]]; then
                                 rm -r ${HOME}${workingdirectory}/trash
                                 mkdir ${HOME}${workingdirectory}/trash
+				touch ${HOME}${workingdirectory}/trash/.tmp
                                 echo "trash emptied"
 			else
 				ls ${HOME}${workingdirectory}/trash
